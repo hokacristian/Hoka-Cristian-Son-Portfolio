@@ -3,7 +3,7 @@
 import { ReactNode } from 'react';
 
 interface GradientBackgroundProps {
-  children: ReactNode;
+  children?: ReactNode;
   variant?: 'blue' | 'purple' | 'teal' | 'orange';
   className?: string;
 }
