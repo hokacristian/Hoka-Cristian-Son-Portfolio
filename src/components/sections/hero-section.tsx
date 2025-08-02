@@ -48,7 +48,7 @@ export function HeroSection() {
           <FadeText delay={0.4} className="mb-8">
             <div className="text-xl sm:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 min-h-[2.5rem]">
               <Typewriter 
-                text="Telecommunication Engineering Student & IoT Developer"
+                text="Founder @ Code Mercenaries | Full-Stack Developer | Bangkit Graduate"
                 delay={1000}
                 speed={80}
               />
@@ -57,9 +57,9 @@ export function HeroSection() {
 
           <FadeText delay={0.8} className="mb-8">
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Passionate about creating innovative solutions in cloud computing, software engineering, 
-              and IoT systems. Distinction Graduate of Bangkit Academy 2024 with expertise in 
-              full-stack development and mobile applications.
+              Fresh Telecommunication Engineering graduate and Founder of Code Mercenaries Software House with 2+ years hands-on experience 
+              in full-stack development. Delivered 10+ successful projects ranging from IoT monitoring systems to learning management platforms. 
+              Strong background in backend security, database design, and mobile development.
             </p>
           </FadeText>
 

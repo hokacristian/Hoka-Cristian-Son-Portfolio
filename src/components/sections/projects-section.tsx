@@ -1,16 +1,21 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Calendar, Award } from 'lucide-react';
+import { ExternalLink, Calendar, Award, Eye } from 'lucide-react';
 import { FadeText } from '../ui/fade-text';
 import { SpotlightCard } from '../ui/spotlight-card';
+import { ImageSlider } from '../ui/image-slider';
 
 interface Project {
+  id: string;
   title: string;
   year: string;
   description: string;
   technologies: string[];
   highlights: string[];
+  images: string[];
+  category: string;
   links?: {
     demo?: string;
     github?: string;
@@ -21,73 +26,128 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'BeWise - Food Recommendation App',
-    year: '2025',
-    description: 'Intelligent food and beverage recommendation mobile application using Flutter framework integrated with machine learning algorithms.',
-    technologies: ['Flutter', 'Machine Learning', 'Dart', 'Firebase', 'Barcode Scanner'],
-    highlights: [
-      'Personalized recommendation system based on user preferences',
-      'Barcode scanning functionality for product identification',
-      'Subscription-based payment gateway integration',
-      'ML models for analyzing nutritional data and user behavior'
-    ],
-    featured: true
-  },
-  {
+    id: 'inventory-system',
     title: 'Office Inventory Management System',
     year: '2025',
-    description: 'Comprehensive web-based inventory management system for office equipment tracking with automatic QR code generation.',
-    technologies: ['Express.js', 'PostgreSQL', 'Next.js', 'QR Code', 'TypeScript'],
+    category: 'Enterprise Software',
+    description: 'Complete inventory management system with QR code generation, implementing multi-stage approval workflow reducing manual processes by 70%.',
+    technologies: ['Node.js', 'PostgreSQL', 'Prisma ORM', 'QR Code', 'JWT'],
     highlights: [
-      'Automatic QR code generation for asset identification',
-      'Real-time inventory tracking and management',
-      'Role-based access control system',
-      'Comprehensive reporting and analytics'
+      'Developed complete inventory management system with QR code generation',
+      'Implemented multi-stage approval workflow reducing manual processes by 70%',
+      'Built role-based authentication system with JWT for 100+ users',
+      'Real-time inventory tracking and comprehensive reporting'
     ],
-    links: {
-      demo: '#'
-    }
-  },
-  {
-    title: 'WhatsApp Broadcasting Bot',
-    year: '2024',
-    description: 'Automated WhatsApp bot system for agent communication and mass broadcasting integrated with business workflows.',
-    technologies: ['Express.js', 'WhatsApp.js', 'Node.js', 'JavaScript', 'APIs'],
-    highlights: [
-      'Mass broadcasting capabilities for business communication',
-      'Automated message scheduling and delivery',
-      'Integration with existing business workflows',
-      'Customer engagement automation'
-    ],
+    images: ['/projects/inventory-1.jpg', '/projects/inventory-2.jpg', '/projects/inventory-3.jpg'],
     featured: true
   },
   {
-    title: 'KidLink - Child Communication App',
-    year: '2024',
-    description: 'Mobile application with AI-powered content filtering for safe child communication developed during Bangkit Academy.',
-    technologies: ['Kotlin', 'Android Studio', 'REST APIs', 'AI/ML', 'Material Design'],
+    id: 'smartbin-system',
+    title: 'SmartBin Monitoring System',
+    year: '2025',
+    category: 'IoT & Mobile',
+    description: 'IoT-enabled waste monitoring Android app with real-time tracking and Google Maps integration across 20+ locations.',
+    technologies: ['Android (Kotlin)', 'Firebase', 'Google Maps API', 'IoT Sensors'],
     highlights: [
-      'AI-powered content filtering for child safety',
-      'Real-time messaging with context-aware moderation',
-      'Parental control features and monitoring',
-      'Secure and encrypted communication'
+      'Created IoT-enabled waste monitoring Android app with real-time tracking',
+      'Integrated Google Maps for geographical bin monitoring across 20+ locations',
+      'Developed 3-category waste classification system with 95% accuracy',
+      'Real-time notifications and status updates'
     ],
-    links: {
-      demo: '#'
-    },
+    images: ['/projects/smartbin-1.jpg', '/projects/smartbin-2.jpg', '/projects/smartbin-3.jpg'],
     featured: true
   },
   {
-    title: 'PROBOX Smart Storage System',
-    year: '2023',
-    description: 'IoT-based secure storage solution with RFID access control and web dashboard for monitoring access history.',
-    technologies: ['IoT Sensors', 'RFID', 'Web Development', 'Arduino', 'Firebase'],
+    id: 'lms-system',
+    title: 'Learning Management System',
+    year: '2025',
+    category: 'Education Platform',
+    description: 'Comprehensive LMS supporting 3 user roles with automated assignment workflow handling 500+ submissions monthly.',
+    technologies: ['Node.js', 'PostgreSQL', 'Supabase', 'Express.js'],
     highlights: [
-      'RFID-based access control system',
-      'Real-time monitoring and logging',
+      'Built comprehensive LMS supporting 3 user roles (Admin, Teacher, Student)',
+      'Implemented assignment workflow handling 500+ submissions monthly',
+      'Created automated notification system reducing late submissions by 60%',
+      'Role-based access control and progress tracking'
+    ],
+    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
+    featured: true
+  },
+  {
+    id: 'profile-matching',
+    title: 'Profile Matching (Decision Support System)',
+    year: '2025',
+    category: 'HR Technology',
+    description: 'Intelligent candidate evaluation system using weighted criteria with automated ranking, reducing HR screening time by 40%.',
+    technologies: ['Node.js', 'PostgreSQL', 'Express.js', 'Algorithm Design'],
+    highlights: [
+      'Developed intelligent candidate evaluation system using weighted criteria',
+      'Built dynamic calculation engine for automated ranking',
+      'Reduced HR screening time by 40% through automated scoring',
+      'Multi-criteria decision analysis implementation'
+    ],
+    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
+  },
+  {
+    id: 'ministry-management',
+    title: 'Ministry Management Pro',
+    year: '2025',
+    category: 'AI & Automation',
+    description: 'Church activity management system with AI-powered validation and WhatsApp notifications for real-time updates.',
+    technologies: ['Node.js', 'PostgreSQL', 'OpenAI GPT-4', 'WhatsApp API'],
+    highlights: [
+      'Created church activity management system with AI-powered validation',
+      'Integrated WhatsApp notifications for real-time updates',
+      'Implemented multi-stage approval workflow for 50+ ministry forms monthly',
+      'AI-assisted form validation and processing'
+    ],
+    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
+  },
+  {
+    id: 'bewise-app',
+    title: 'BeWise - ML-Powered Nutrition Analysis',
+    year: '2025',
+    category: 'Mobile & AI',
+    description: 'Capstone project: Android application with real-time barcode scanning and ML-powered product recommendations.',
+    technologies: ['Android', 'Machine Learning', 'Barcode Scanner', 'TensorFlow'],
+    highlights: [
+      'Created Android application with real-time barcode scanning',
+      'Implemented ML-powered product recommendations',
+      'Nutrition analysis and dietary suggestions',
+      'University capstone project achievement'
+    ],
+    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
+  },
+  {
+    id: 'kidlink-app',
+    title: 'KidLink - Secure Chat Application',
+    year: '2024',
+    category: 'Mobile & Security',
+    description: 'Bangkit Academy capstone project: secure chat application for children safety with AI-powered content filtering.',
+    technologies: ['Kotlin', 'Android Studio', 'AI/ML', 'Security'],
+    highlights: [
+      'Built secure chat application for children safety',
+      'AI-powered content filtering and moderation',
+      'Selected into Top 50 teams for Capstone Project',
+      'Bangkit Academy 2024 distinction project'
+    ],
+    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'  ],
+    featured: true
+  },
+  {
+    id: 'probox-iot',
+    title: 'PROBOX IoT RFID Access Control',
+    year: '2023-2024',
+    category: 'IoT & Hardware',
+    description: 'IoT-based secure storage solution with RFID access control developed during research assistant role.',
+    technologies: ['IoT Sensors', 'RFID', 'Arduino', 'Firebase', 'Web Development'],
+    highlights: [
+      'RFID-based access control system for secure storage',
+      'Real-time monitoring and access logging',
       'Web dashboard for system management',
-      'Secure item storage with access history'
+      'Academic research project collaboration'
     ],
+    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
     links: {
       website: 'https://probox-web.web.app/'
     }
@@ -95,6 +155,14 @@ const projects: Project[] = [
 ];
 
 export function ProjectsSection() {
+  const [showAll, setShowAll] = useState(false);
+  const featuredProjects = projects.filter(project => project.featured);
+  const displayedProjects = showAll ? projects : featuredProjects;
+
+  const handleCardClick = () => {
+    window.open('https://medium.com/@hokacristian', '_blank');
+  };
+
   return (
     <section id="projects" className="py-20 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,123 +174,114 @@ export function ProjectsSection() {
           </FadeText>
           <FadeText delay={0.2}>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              A showcase of my recent work spanning mobile applications, web development, 
-              IoT systems, and automation solutions. Each project represents a unique 
-              challenge and innovative solution.
+              A comprehensive showcase of 10+ successful projects delivered through Code Mercenaries Software House, 
+              ranging from enterprise inventory management systems to IoT monitoring platforms. Click on any project 
+              to read detailed case studies on my Medium blog.
             </p>
           </FadeText>
         </div>
 
-        <div className="space-y-8">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {displayedProjects.map((project, index) => (
             <motion.div
-              key={project.title}
+              key={project.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
+              className="group cursor-pointer"
+              onClick={handleCardClick}
             >
-              <SpotlightCard className={`p-8 ${project.featured ? 'border-2 border-blue-200 dark:border-blue-800' : ''}`}>
-                <div className="flex flex-col lg:flex-row gap-8">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-4 mb-4">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                        {project.title}
-                      </h3>
-                      {project.featured && (
-                        <span className="inline-flex items-center gap-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
-                          <Award size={16} />
-                          Featured
-                        </span>
-                      )}
+              <SpotlightCard className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
+                {/* Project Image Slider */}
+                <div className="relative h-48 mb-4">
+                  <ImageSlider
+                    images={project.images}
+                    alt={project.title}
+                    className="h-full"
+                  />
+                  {project.featured && (
+                    <div className="absolute top-3 right-3 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                      <Award size={12} />
+                      Featured
                     </div>
+                  )}
+                  <div className="absolute top-3 left-3 bg-black/70 text-white px-2 py-1 rounded-full text-xs font-medium">
+                    {project.category}
+                  </div>
+                </div>
 
-                    <div className="flex items-center gap-2 mb-4">
-                      <Calendar size={16} className="text-gray-500" />
-                      <span className="text-gray-500 dark:text-gray-400 text-sm">
-                        {project.year}
+                {/* Project Content */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400 text-sm">
+                      <Calendar size={14} />
+                      <span>{project.year}</span>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-1 mb-4">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-xs font-medium"
+                      >
+                        {tech}
                       </span>
-                    </div>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 px-2 py-1 rounded text-xs font-medium">
+                        +{project.technologies.length - 3} more
+                      </span>
+                    )}
+                  </div>
 
-                    <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    <div className="mb-6">
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
-                        Key Features:
-                      </h4>
-                      <ul className="space-y-2">
-                        {project.highlights.map((highlight, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 flex-shrink-0"></span>
-                            <span className="text-gray-700 dark:text-gray-300 text-sm">
-                              {highlight}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-sm font-medium"
-                        >
-                          {tech}
-                        </span>
+                  {/* Key Highlights */}
+                  <div className="mb-4">
+                    <ul className="space-y-1">
+                      {project.highlights.slice(0, 2).map((highlight, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-xs text-gray-600 dark:text-gray-400">
+                          <span className="w-1 h-1 bg-blue-600 rounded-full mt-1.5 flex-shrink-0"></span>
+                          <span className="line-clamp-1">{highlight}</span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
+                  </div>
 
-                    {project.links && (
-                      <div className="flex gap-4">
-                        {project.links.demo && (
-                          <motion.a
-                            href={project.links.demo}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-                          >
-                            <ExternalLink size={18} />
-                            Live Demo
-                          </motion.a>
-                        )}
-                        {project.links.website && (
-                          <motion.a
-                            href={project.links.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-                          >
-                            <ExternalLink size={18} />
-                            View Project
-                          </motion.a>
-                        )}
-                        {project.links.github && (
-                          <motion.a
-                            href={project.links.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-                          >
-                            <Github size={18} />
-                            Source Code
-                          </motion.a>
-                        )}
-                      </div>
+                  {/* View Project Button */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400 text-sm font-medium group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
+                      <Eye size={16} />
+                      <span>Read Case Study</span>
+                    </div>
+                    {project.links?.website && (
+                      <ExternalLink size={16} className="text-gray-400 group-hover:text-blue-600 transition-colors" />
                     )}
                   </div>
                 </div>
               </SpotlightCard>
             </motion.div>
           ))}
+        </div>
+
+        {/* Show More/Less Button */}
+        <div className="text-center">
+          <motion.button
+            onClick={() => setShowAll(!showAll)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl"
+          >
+            {showAll ? 'Show Less' : `See All Projects (${projects.length})`}
+          </motion.button>
         </div>
 
         {/* Project Stats */}
@@ -238,19 +297,19 @@ export function ProjectsSection() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">5+</div>
-              <div className="text-gray-600 dark:text-gray-400">Projects Completed</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">10+</div>
+              <div className="text-gray-600 dark:text-gray-400">Commercial Clients</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3</div>
-              <div className="text-gray-600 dark:text-gray-400">Featured Projects</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">95%</div>
+              <div className="text-gray-600 dark:text-gray-400">Client Satisfaction</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">15+</div>
-              <div className="text-gray-600 dark:text-gray-400">Technologies Used</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">70%</div>
+              <div className="text-gray-600 dark:text-gray-400">Process Reduction</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">2024</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">Top 10%</div>
               <div className="text-gray-600 dark:text-gray-400">Bangkit Graduate</div>
             </div>
           </div>

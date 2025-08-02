@@ -10,25 +10,25 @@ const highlights = [
     icon: GraduationCap,
     title: 'Education',
     description: 'Telecommunication Engineering at Telkom University (GPA: 3.40/4.00)',
-    details: 'Specializing in Cloud and Software Engineering, Mobile Development, and IoT'
+    details: 'Specializing in Cloud and Software Engineering, Mobile Development (Android), Internet of Things. Capstone Project: BeWise - ML-Powered Nutrition Analysis Application'
   },
   {
     icon: Award,
     title: 'Bangkit Academy 2024',
-    description: 'Distinction Graduate - Mobile Developer Cohort',
-    details: 'Intensive program focusing on mobile app development with Kotlin and Android Studio'
+    description: 'Distinction Graduate (Top 10%) - Mobile Developer Cohort',
+    details: 'Selected into Top 50 teams for Capstone Project. Built "KidLink" - secure chat application for children safety'
   },
   {
     icon: Code,
-    title: 'Technical Expertise',
-    description: 'Full-stack development with modern technologies',
-    details: 'Express.js, PostgreSQL, Next.js, Android development with Kotlin and Flutter'
+    title: 'Software House Founder',
+    description: 'Code Mercenaries Software House - Founder & Lead Developer',
+    details: 'Founded and scaled software house serving 10+ commercial clients with team of 3 developers. Achieved 95% client satisfaction rate with on-time project delivery'
   },
   {
     icon: Users,
-    title: 'Leadership Experience',
-    description: 'General Chairperson of Student Council (MPK) 2019-2020',
-    details: 'Led student initiatives and managed organizational activities at SMK Telkom Jakarta'
+    title: 'Backend Security Specialist',
+    description: 'Digistar Class 2024 - Mentee Hacker Backend',
+    details: 'Intensive backend security and cybersecurity training. Specialized in database security, authentication systems, and secure API development'
   }
 ];
 
@@ -44,9 +44,9 @@ export function AboutSection() {
           </FadeText>
           <FadeText delay={0.2}>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              I&apos;m a passionate Telecommunication Engineering student with a strong background in 
-              IoT development, mobile applications, and web technologies. I love creating innovative 
-              solutions that solve real-world problems.
+              Fresh Telecommunication Engineering graduate and entrepreneur with 2+ years of hands-on experience 
+              in full-stack development. I specialize in backend security, database design, and creating 
+              enterprise-level solutions that solve real-world problems.
             </p>
           </FadeText>
         </div>
@@ -97,21 +97,21 @@ export function AboutSection() {
           </h3>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              My journey in technology began during my time at SMK Telkom Jakarta, where I specialized 
-              in Access Network Engineering and learned the fundamentals of network systems and fiber 
-              optic installation. This foundation sparked my interest in creating connected solutions.
+              My entrepreneurial journey began in January 2025 when I founded Code Mercenaries Software House, 
+              scaling it to serve 10+ commercial clients with a team of 3 developers. We specialize in 
+              enterprise solutions including inventory management, learning management systems, and IoT monitoring platforms.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              Currently pursuing my Bachelor&apos;s degree in Telecommunication Engineering at Telkom University, 
-              I&apos;ve expanded my expertise into cloud computing, software engineering, and IoT systems. 
-              My academic journey has been complemented by hands-on experience through various projects 
-              and intensive training programs.
+              As a Telecommunication Engineering graduate from Telkom University with a 3.40 GPA, I&apos;ve built 
+              expertise in cloud computing, software engineering, and IoT systems. My academic excellence was 
+              recognized through my distinction graduation from Bangkit Academy 2024, where I ranked in the top 10% 
+              and was selected into the top 50 teams for the capstone project.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              The highlight of my academic career was graduating with distinction from Bangkit Academy 2024, 
-              where I honed my mobile development skills and collaborated with talented peers on innovative 
-              projects. This experience has prepared me to tackle complex challenges in the tech industry 
-              and contribute meaningfully to cutting-edge solutions.
+              Beyond academics, I&apos;ve gained specialized training in backend security through Digistar Class 2024, 
+              focusing on database security, authentication systems, and secure API development. My research 
+              experience as a Research Assistant at Cyber Physical System Laboratory has further strengthened 
+              my IoT development skills and mentoring capabilities.
             </p>
           </div>
         </motion.div>
