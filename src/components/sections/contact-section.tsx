@@ -72,6 +72,7 @@ export function ContactSection() {
   });
   
   const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [storedToken, setStoredToken] = useState<string>('');
   const [showTurnstile, setShowTurnstile] = useState<boolean>(false);
   const [userInteracted, setUserInteracted] = useState<boolean>(false);
   const [captchaCompleted, setCaptchaCompleted] = useState<boolean>(false);
@@ -142,7 +143,7 @@ export function ContactSection() {
       return;
     }
     
-    if (!turnstileToken) {
+    if (!storedToken && !turnstileToken && !captchaCompleted) {
       setStatus({
         type: 'error',
         message: 'Please complete the CAPTCHA verification.'
@@ -160,7 +161,7 @@ export function ContactSection() {
         },
         body: JSON.stringify({
           ...formData,
-          turnstileToken
+          turnstileToken: storedToken || turnstileToken
         }),
       });
 
@@ -182,6 +183,9 @@ export function ContactSection() {
         
         // Reset Turnstile
         setTurnstileToken('');
+        setStoredToken('');
+        setCaptchaCompleted(false);
+        setShowTurnstile(false);
         if (turnstileRef.current) {
           turnstileRef.current.reset();
         }
@@ -403,6 +407,7 @@ export function ContactSection() {
                       siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
                       onSuccess={(token) => {
                         setTurnstileToken(token);
+                        setStoredToken(token);
                         setCaptchaCompleted(true);
                         // Hide CAPTCHA after successful verification with smooth animation
                         setTimeout(() => {
@@ -445,7 +450,7 @@ export function ContactSection() {
                 
                 <motion.button
                   type="submit"
-                  disabled={status.type === 'loading' || (showTurnstile && !turnstileToken)}
+                  disabled={status.type === 'loading' || (showTurnstile && !turnstileToken && !captchaCompleted)}
                   whileHover={{ scale: status.type === 'loading' ? 1 : 1.02 }}
                   whileTap={{ scale: status.type === 'loading' ? 1 : 0.98 }}
                   className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
