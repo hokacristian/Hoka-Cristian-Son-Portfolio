@@ -22,23 +22,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify Turnstile token
+    // Verify Turnstile token according to official documentation
+    const turnstileFormData = new FormData();
+    turnstileFormData.append('secret', process.env.TURNSTILE_SECRET_KEY || '');
+    turnstileFormData.append('response', turnstileToken);
+    turnstileFormData.append('remoteip', request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || '');
+
     const turnstileResponse = await fetch(
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `secret=${process.env.TURNSTILE_SECRET_KEY}&response=${turnstileToken}`,
+        body: turnstileFormData,
       }
     );
 
     const turnstileResult = await turnstileResponse.json();
 
     if (!turnstileResult.success) {
+      console.error('Turnstile verification failed:', turnstileResult['error-codes']);
       return NextResponse.json(
-        { error: 'CAPTCHA verification failed' },
+        { 
+          error: 'CAPTCHA verification failed',
+          details: turnstileResult['error-codes']
+        },
         { status: 400 }
       );
     }

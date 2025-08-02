@@ -337,10 +337,22 @@ export function ContactSection() {
                 <div className="flex justify-center">
                   <Turnstile
                     ref={turnstileRef}
-                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABn0POjthdf2Tnku'}
-                    onSuccess={(token) => setTurnstileToken(token)}
-                    onError={() => setTurnstileToken('')}
-                    onExpire={() => setTurnstileToken('')}
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                    onSuccess={(token) => {
+                      setTurnstileToken(token);
+                    }}
+                    onError={(errorCode) => {
+                      console.error('Turnstile error code:', errorCode);
+                      setTurnstileToken('');
+                      // Don't show error message immediately, let user try again
+                    }}
+                    onExpire={() => {
+                      setTurnstileToken('');
+                      // Auto-refresh expired widget
+                      if (turnstileRef.current) {
+                        turnstileRef.current.reset();
+                      }
+                    }}
                   />
                 </div>
                 
