@@ -337,7 +337,7 @@ export function ContactSection() {
                 <div className="flex justify-center">
                   <Turnstile
                     ref={turnstileRef}
-                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAAx_your_site_key_here'}
+                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAABn0POjthdf2Tnku'}
                     onSuccess={(token) => setTurnstileToken(token)}
                     onError={() => setTurnstileToken('')}
                     onExpire={() => setTurnstileToken('')}
