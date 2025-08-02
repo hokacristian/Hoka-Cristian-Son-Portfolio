@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
@@ -72,11 +72,56 @@ export function ContactSection() {
   });
   
   const [turnstileToken, setTurnstileToken] = useState<string>('');
+  const [showTurnstile, setShowTurnstile] = useState<boolean>(false);
+  const [userInteracted, setUserInteracted] = useState<boolean>(false);
+  const formSectionRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const turnstileRef = useRef<any>(null);
 
+  // Trigger Turnstile loading when user starts interacting with form
+  useEffect(() => {
+    if (userInteracted && !showTurnstile) {
+      // Delay showing Turnstile to allow user to complete form first
+      const timer = setTimeout(() => {
+        setShowTurnstile(true);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [userInteracted, showTurnstile]);
+
+  // Alternative trigger: Show Turnstile when form section is in viewport for a while
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !showTurnstile && !userInteracted) {
+            // Show CAPTCHA after user has been viewing the form for 3 seconds
+            setTimeout(() => {
+              if (!userInteracted) {
+                setShowTurnstile(true);
+              }
+            }, 3000);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    if (formSectionRef.current) {
+      observer.observe(formSectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [showTurnstile, userInteracted]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    
+    // Mark that user has started interacting with form
+    if (!userInteracted) {
+      setUserInteracted(true);
+    }
+    
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -85,6 +130,16 @@ export function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Show Turnstile if not already shown when user tries to submit
+    if (!showTurnstile) {
+      setShowTurnstile(true);
+      setStatus({
+        type: 'error',
+        message: 'Please complete the CAPTCHA verification that just appeared below.'
+      });
+      return;
+    }
     
     if (!turnstileToken) {
       setStatus({
@@ -234,6 +289,7 @@ export function ContactSection() {
 
           {/* Contact Form */}
           <motion.div
+            ref={formSectionRef}
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
@@ -333,32 +389,44 @@ export function ContactSection() {
                   />
                 </div>
 
-                {/* Cloudflare Turnstile CAPTCHA */}
-                <div className="flex justify-center">
-                  <Turnstile
-                    ref={turnstileRef}
-                    siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-                    onSuccess={(token) => {
-                      setTurnstileToken(token);
-                    }}
-                    onError={(errorCode) => {
-                      console.error('Turnstile error code:', errorCode);
-                      setTurnstileToken('');
-                      // Don't show error message immediately, let user try again
-                    }}
-                    onExpire={() => {
-                      setTurnstileToken('');
-                      // Auto-refresh expired widget
-                      if (turnstileRef.current) {
-                        turnstileRef.current.reset();
-                      }
-                    }}
-                  />
-                </div>
+                {/* Cloudflare Turnstile CAPTCHA - Lazy Loaded */}
+                {showTurnstile ? (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex justify-center"
+                  >
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                      onSuccess={(token) => {
+                        setTurnstileToken(token);
+                      }}
+                      onError={(errorCode) => {
+                        console.error('Turnstile error code:', errorCode);
+                        setTurnstileToken('');
+                      }}
+                      onExpire={() => {
+                        setTurnstileToken('');
+                        // Auto-refresh expired widget
+                        if (turnstileRef.current) {
+                          turnstileRef.current.reset();
+                        }
+                      }}
+                    />
+                  </motion.div>
+                ) : (
+                  <div className="flex justify-center py-4">
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      CAPTCHA will appear after you start filling the form
+                    </p>
+                  </div>
+                )}
                 
                 <motion.button
                   type="submit"
-                  disabled={status.type === 'loading' || !turnstileToken}
+                  disabled={status.type === 'loading' || (showTurnstile && !turnstileToken)}
                   whileHover={{ scale: status.type === 'loading' ? 1 : 1.02 }}
                   whileTap={{ scale: status.type === 'loading' ? 1 : 0.98 }}
                   className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
