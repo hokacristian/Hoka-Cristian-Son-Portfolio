@@ -74,6 +74,7 @@ export function ContactSection() {
   const [turnstileToken, setTurnstileToken] = useState<string>('');
   const [showTurnstile, setShowTurnstile] = useState<boolean>(false);
   const [userInteracted, setUserInteracted] = useState<boolean>(false);
+  const [captchaCompleted, setCaptchaCompleted] = useState<boolean>(false);
   const formSectionRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const turnstileRef = useRef<any>(null);
@@ -402,13 +403,20 @@ export function ContactSection() {
                       siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
                       onSuccess={(token) => {
                         setTurnstileToken(token);
+                        setCaptchaCompleted(true);
+                        // Hide CAPTCHA after successful verification with smooth animation
+                        setTimeout(() => {
+                          setShowTurnstile(false);
+                        }, 1500);
                       }}
                       onError={(errorCode) => {
                         console.error('Turnstile error code:', errorCode);
                         setTurnstileToken('');
+                        setCaptchaCompleted(false);
                       }}
                       onExpire={() => {
                         setTurnstileToken('');
+                        setCaptchaCompleted(false);
                         // Auto-refresh expired widget
                         if (turnstileRef.current) {
                           turnstileRef.current.reset();
@@ -418,9 +426,20 @@ export function ContactSection() {
                   </motion.div>
                 ) : (
                   <div className="flex justify-center py-4">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      CAPTCHA will appear after you start filling the form
-                    </p>
+                    {captchaCompleted ? (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        className="flex items-center gap-2 text-green-600 dark:text-green-400 text-sm font-medium"
+                      >
+                        <CheckCircle size={16} />
+                        <span>CAPTCHA verified successfully!</span>
+                      </motion.div>
+                    ) : (
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        CAPTCHA will appear after you start filling the form
+                      </p>
+                    )}
                   </div>
                 )}
                 
