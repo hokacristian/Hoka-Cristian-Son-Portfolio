@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Github, Linkedin, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, MapPin, Github, Linkedin, Send, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { Turnstile } from '@marsidev/react-turnstile';
 import { FadeText } from '../ui/fade-text';
 import { SpotlightCard } from '../ui/spotlight-card';
@@ -15,13 +15,7 @@ const contactInfo = [
     href: 'mailto:hokacristian@gmail.com',
     color: 'text-red-500'
   },
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '+62 851-7305-2969',
-    href: 'tel:+6285173052969',
-    color: 'text-green-500'
-  },
+  
   {
     icon: MapPin,
     label: 'Location',
@@ -503,9 +497,9 @@ export function ContactSection() {
               Let&apos;s Work Together
             </h3>
             <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-              Code Mercenaries Software House is ready to deliver your next enterprise solution. 
-              From inventory management systems to AI-powered applications, we turn complex challenges 
-              into innovative software solutions.
+              As a passionate software engineer, I&apos;m ready to bring your vision to life. 
+              From enterprise web applications to mobile solutions and IoT systems, I specialize in 
+              delivering clean, scalable code that solves real-world problems.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
@@ -517,16 +511,7 @@ export function ContactSection() {
                 <Mail size={20} />
                 Email Me
               </motion.a>
-              <motion.a
-                href="/resume.pdf"
-                download="Hoka_Cristian_Son_Resume.pdf"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 dark:hover:border-blue-400 px-8 py-3 rounded-lg font-semibold transition-all"
-              >
-                <Send size={20} />
-                Download CV
-              </motion.a>
+
             </div>
           </div>
         </motion.div>

@@ -23,12 +23,6 @@ const socialLinks = [
     icon: Github,
     color: 'hover:text-gray-900 dark:hover:text-white'
   },
-  {
-    name: 'Phone',
-    href: 'tel:+6281287901108',
-    icon: Phone,
-    color: 'hover:text-green-500'
-  }
 ];
 
 export function Footer() {
@@ -115,7 +109,7 @@ export function Footer() {
           className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800 text-center"
         >
           <p className="text-sm text-gray-500 dark:text-gray-500">
-            © 2025 Hoka Cristian Son. Built with Next.js 15, React 19, and Tailwind CSS.
+            © 2025 Hoka Cristian Son.
           </p>
         </motion.div>
       </div>

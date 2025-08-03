@@ -48,9 +48,9 @@ export function HeroSection() {
           <FadeText delay={0.4} className="mb-8">
             <div className="text-xl sm:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 min-h-[2.5rem]">
               <Typewriter 
-                text="Founder @ Code Mercenaries | Full-Stack Developer | Bangkit Graduate"
-                delay={1000}
-                speed={80}
+                text="Founder @Code Mercenaries | Full-Stack Developer | Bangkit Graduate"
+                delay={80}
+                speed={10}
               />
             </div>
           </FadeText>
@@ -91,7 +91,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 sm:mb-0"
           >
             <motion.button
               onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
@@ -119,7 +119,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 2 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden sm:block"
       >
         <motion.button
           onClick={scrollToNext}
