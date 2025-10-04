@@ -310,14 +310,14 @@ export function TechStackSection() {
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">2+</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">4+</div>
               <div className="text-gray-600 dark:text-gray-400">Years Commercial Experience</div>
               <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                 Full-stack development & security
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">10+</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">30+</div>
               <div className="text-gray-600 dark:text-gray-400">Enterprise Projects</div>
               <div className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                 Delivered with 95% client satisfaction

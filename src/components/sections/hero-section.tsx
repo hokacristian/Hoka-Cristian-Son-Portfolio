@@ -47,8 +47,8 @@ export function HeroSection() {
 
           <FadeText delay={0.4} className="mb-8">
             <div className="text-xl sm:text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 min-h-[2.5rem]">
-              <Typewriter 
-                text="Founder @Code Mercenaries | Full-Stack Developer | Bangkit Graduate"
+              <Typewriter
+                text="Full-Stack Developer | Backend Security Specialist | Bangkit Graduate"
                 delay={80}
                 speed={10}
               />
@@ -57,9 +57,9 @@ export function HeroSection() {
 
           <FadeText delay={0.8} className="mb-8">
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Fresh Telecommunication Engineering graduate and Founder of Code Mercenaries Software House with 2+ years hands-on experience 
-              in full-stack development. Delivered 10+ successful projects ranging from IoT monitoring systems to learning management platforms. 
-              Strong background in backend security, database design, and mobile development.
+              Full-Stack Developer with 4+ years of experience delivering 30+ web, mobile, and IoT projects for diverse clients.
+              Specialized in building secure, scalable, and user-friendly systems from backend to frontend, with expertise in
+              code quality, database security, and agile project delivery consistently achieving 95%+ client satisfaction.
             </p>
           </FadeText>
 

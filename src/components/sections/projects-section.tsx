@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Calendar, Award, Eye } from 'lucide-react';
 import { FadeText } from '../ui/fade-text';
 import { SpotlightCard } from '../ui/spotlight-card';
-import { ImageSlider } from '../ui/image-slider';
 
 interface Project {
   id: string;
@@ -14,7 +13,6 @@ interface Project {
   description: string;
   technologies: string[];
   highlights: string[];
-  images: string[];
   category: string;
   links?: {
     demo?: string;
@@ -38,7 +36,6 @@ const projects: Project[] = [
       'Built role-based authentication system with JWT for 100+ users',
       'Real-time inventory tracking and comprehensive reporting'
     ],
-    images: ['/projects/inventory-1.jpg', '/projects/inventory-2.jpg', '/projects/inventory-3.jpg'],
     featured: true
   },
   {
@@ -54,7 +51,6 @@ const projects: Project[] = [
       'Developed 3-category waste classification system with 95% accuracy',
       'Real-time notifications and status updates'
     ],
-    images: ['/projects/smartbin-1.jpg', '/projects/smartbin-2.jpg', '/projects/smartbin-3.jpg'],
     featured: true
   },
   {
@@ -70,7 +66,6 @@ const projects: Project[] = [
       'Created automated notification system reducing late submissions by 60%',
       'Role-based access control and progress tracking'
     ],
-    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
     featured: true
   },
   {
@@ -86,7 +81,6 @@ const projects: Project[] = [
       'Reduced HR screening time by 40% through automated scoring',
       'Multi-criteria decision analysis implementation'
     ],
-    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
   },
   {
     id: 'ministry-management',
@@ -101,7 +95,6 @@ const projects: Project[] = [
       'Implemented multi-stage approval workflow for 50+ ministry forms monthly',
       'AI-assisted form validation and processing'
     ],
-    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
   },
   {
     id: 'bewise-app',
@@ -116,7 +109,6 @@ const projects: Project[] = [
       'Nutrition analysis and dietary suggestions',
       'University capstone project achievement'
     ],
-    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
   },
   {
     id: 'kidlink-app',
@@ -131,7 +123,6 @@ const projects: Project[] = [
       'Selected into Top 50 teams for Capstone Project',
       'Bangkit Academy 2024 distinction project'
     ],
-    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'  ],
     featured: true
   },
   {
@@ -147,7 +138,6 @@ const projects: Project[] = [
       'Web dashboard for system management',
       'Academic research project collaboration'
     ],
-    images: ['/projects/lms-1.jpg', '/projects/lms-1.jpg', '/projects/lms-1.jpg'],
     links: {
       website: 'https://probox-web.web.app/'
     }
@@ -193,26 +183,19 @@ export function ProjectsSection() {
               onClick={handleCardClick}
             >
               <SpotlightCard className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 transform group-hover:scale-[1.02]">
-                {/* Project Image Slider */}
-                <div className="relative h-48 mb-4">
-                  <ImageSlider
-                    images={project.images}
-                    alt={project.title}
-                    className="h-full"
-                  />
-                  {project.featured && (
-                    <div className="absolute top-3 right-3 bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
-                      <Award size={12} />
-                      Featured
-                    </div>
-                  )}
-                  <div className="absolute top-3 left-3 bg-black/70 text-white px-2 py-1 rounded-full text-xs font-medium">
-                    {project.category}
-                  </div>
-                </div>
-
                 {/* Project Content */}
                 <div className="p-6">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="bg-black/70 dark:bg-gray-700 text-white px-3 py-1 rounded-full text-xs font-medium">
+                      {project.category}
+                    </div>
+                    {project.featured && (
+                      <div className="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1">
+                        <Award size={12} />
+                        Featured
+                      </div>
+                    )}
+                  </div>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {project.title}
@@ -297,7 +280,7 @@ export function ProjectsSection() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">10+</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">40+</div>
               <div className="text-gray-600 dark:text-gray-400">Commercial Clients</div>
             </div>
             <div className="text-center">

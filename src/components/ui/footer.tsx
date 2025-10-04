@@ -28,7 +28,7 @@ const socialLinks = [
 export function Footer() {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/resume.pdf';
+    link.href = '/Hoka Cristian Son-resume.pdf';
     link.download = 'Hoka_Cristian_Son_Resume.pdf';
     document.body.appendChild(link);
     link.click();

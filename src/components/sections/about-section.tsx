@@ -20,9 +20,9 @@ const highlights = [
   },
   {
     icon: Code,
-    title: 'Software House Founder',
-    description: 'Code Mercenaries Software House - Founder & Lead Developer',
-    details: 'Founded and scaled software house serving 10+ commercial clients with team of 3 developers. Achieved 95% client satisfaction rate with on-time project delivery'
+    title: 'Full-Stack Development Excellence',
+    description: 'Code Mercenaries Software House - Lead Full-Stack Developer',
+    details: 'Spearheaded development of 30+ commercial projects serving diverse clients with agile team collaboration. Consistently delivered high-quality, scalable solutions achieving 95%+ client satisfaction through superior code quality and on-time delivery'
   },
   {
     icon: Users,
@@ -44,9 +44,9 @@ export function AboutSection() {
           </FadeText>
           <FadeText delay={0.2}>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Fresh Telecommunication Engineering graduate and entrepreneur with 2+ years of hands-on experience 
-              in full-stack development. I specialize in backend security, database design, and creating 
-              enterprise-level solutions that solve real-world problems.
+              Accomplished Full-Stack Developer with 4+ years of proven expertise delivering 30+ successful web, mobile,
+              and IoT projects for diverse clients. Specialized in architecting secure, scalable systems with a strong focus
+              on backend security, database design, and enterprise-grade solutions that drive measurable business impact.
             </p>
           </FadeText>
         </div>
@@ -97,21 +97,21 @@ export function AboutSection() {
           </h3>
           <div className="prose prose-lg dark:prose-invert max-w-none">
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              My entrepreneurial journey began in January 2025 when I founded Code Mercenaries Software House, 
-              scaling it to serve 10+ commercial clients with a team of 3 developers. We specialize in 
-              enterprise solutions including inventory management, learning management systems, and IoT monitoring platforms.
+              With 4+ years of comprehensive full-stack development experience, I have successfully delivered 30+ web, mobile,
+              and IoT projects for diverse clients across multiple industries. My technical journey centers on building secure,
+              scalable systems from backend to frontend, with particular expertise in Node.js, PostgreSQL, and modern web frameworks.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              As a Telecommunication Engineering graduate from Telkom University with a 3.40 GPA, I&apos;ve built 
-              expertise in cloud computing, software engineering, and IoT systems. My academic excellence was 
-              recognized through my distinction graduation from Bangkit Academy 2024, where I ranked in the top 10% 
-              and was selected into the top 50 teams for the capstone project.
+              As a Telecommunication Engineering graduate from Telkom University (GPA: 3.40/4.00), I&apos;ve developed deep
+              expertise in cloud computing, software architecture, and IoT systems. My academic excellence was recognized through
+              distinction graduation from Bangkit Academy 2024, where I ranked in the top 10% and was selected into the top 50
+              teams for the capstone project, demonstrating exceptional technical capabilities and innovative problem-solving skills.
             </p>
             <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              Beyond academics, I&apos;ve gained specialized training in backend security through Digistar Class 2024, 
-              focusing on database security, authentication systems, and secure API development. My research 
-              experience as a Research Assistant at Cyber Physical System Laboratory has further strengthened 
-              my IoT development skills and mentoring capabilities.
+              My professional development includes specialized training in backend security through Digistar Class 2024, where I
+              mastered database security, authentication systems, and secure API development. Collaborating with agile teams,
+              I consistently deliver complex projects efficiently while maintaining rigorous code quality standards and achieving
+              95%+ client satisfaction rates through on-time delivery and exceptional technical execution.
             </p>
           </div>
         </motion.div>
