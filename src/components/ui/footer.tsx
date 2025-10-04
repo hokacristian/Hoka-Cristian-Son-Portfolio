@@ -28,7 +28,7 @@ const socialLinks = [
 export function Footer() {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Hoka Cristian Son-resume.pdf';
+    link.href = '/resume.pdf';
     link.download = 'Hoka_Cristian_Son_Resume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -52,10 +52,10 @@ export function Footer() {
                 Hoka Cristian Son
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Telecommunication Engineering Student
+                Full-Stack Developer
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
-                IoT & Mobile Development Specialist
+                Backend Security & IoT Specialist
               </p>
             </FadeText>
           </div>
